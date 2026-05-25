@@ -1,0 +1,25 @@
+{
+  "name": "Prismix Image Converter",
+  "short_name": "Prismix",
+  "description": "Free online image converter, compressor, resizer, crop tool and image-to-PDF platform.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fbfbff",
+  "icons": [
+    {
+      "src": "/assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
