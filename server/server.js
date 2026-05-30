@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import multer from 'multer';
 import path from 'node:path';
+import nodemailer from 'nodemailer';
 import { fileURLToPath } from 'node:url';
 import { LIMITS, SITE, supportedInputFormats, supportedOutputFormats } from './config.js';
 import { imageEngineReadiness, packResult, parseOptions, processFiles, sharpSupportMatrix } from './image-engine.js';
@@ -32,6 +33,8 @@ const upload = multer({
 });
 
 app.disable('x-powered-by');
+app.use(express.json({ limit: '256kb' }));
+app.use(express.urlencoded({ extended: false, limit: '256kb' }));
 app.use((req, res, next) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
@@ -71,6 +74,81 @@ app.get('/api/health', (_req, res) => {
     readiness: imageEngineReadiness(),
     note: 'Baseline image conversion is production-ready for common web formats. HEIC/HEIF input uses Sharp when available and a fallback decoder when Sharp cannot read the file. HEIC/HEIF output requires server HEIF/HEVC encoder support.'
   });
+});
+
+
+const contactRateMap = new Map();
+function cleanContactText(value = '', max = 5000) {
+  return String(value || '').replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max);
+}
+function escapeHtml(value = '') {
+  return String(value).replace(/[&<>'"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[char]));
+}
+function smtpConfigured() {
+  return Boolean(process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS);
+}
+function createTransporter() {
+  return nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: Number(process.env.SMTP_PORT || 587),
+    secure: String(process.env.SMTP_SECURE || 'false') === 'true',
+    auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
+  });
+}
+
+app.post('/api/contact', async (req, res) => {
+  const ip = req.headers['x-forwarded-for']?.split(',')[0]?.trim() || req.ip || 'unknown';
+  const now = Date.now();
+  const recent = (contactRateMap.get(ip) || []).filter((time) => now - time < 10 * 60 * 1000);
+  if (recent.length >= 5) {
+    contactRateMap.set(ip, recent);
+    return res.status(429).json({ ok: false, message: 'Too many contact attempts. Please try again later.' });
+  }
+  recent.push(now);
+  contactRateMap.set(ip, recent);
+
+  const name = cleanContactText(req.body?.name, 120);
+  const email = cleanContactText(req.body?.email, 180).toLowerCase();
+  const message = cleanContactText(req.body?.message, 5000);
+  const language = cleanContactText(req.body?.language, 24);
+  const page = cleanContactText(req.body?.page, 500);
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  if (!name || !emailOk || !message) {
+    return res.status(400).json({ ok: false, message: 'Please provide a valid name, email and message.' });
+  }
+  if (!smtpConfigured()) {
+    return res.status(503).json({ ok: false, message: 'SMTP is not configured. Set SMTP_HOST, SMTP_USER and SMTP_PASS in Render environment variables.' });
+  }
+
+  const to = process.env.CONTACT_TO || 'info@hakkiburakbakirci.com';
+  const from = process.env.CONTACT_FROM || process.env.SMTP_USER;
+  const safe = { name: escapeHtml(name), email: escapeHtml(email), message: escapeHtml(message).replace(/\n/g, '<br>'), language: escapeHtml(language), page: escapeHtml(page) };
+  const textBody = [
+    'New Prismix contact message',
+    `Full name: ${name}`,
+    `Email: ${email}`,
+    `Language: ${language || '-'}`,
+    `Page: ${page || '-'}`,
+    '',
+    message
+  ].join('\n');
+  const htmlBody = `<h2>New Prismix contact message</h2><p><strong>Full name:</strong> ${safe.name}</p><p><strong>Email:</strong> ${safe.email}</p><p><strong>Language:</strong> ${safe.language || '-'}</p><p><strong>Page:</strong> ${safe.page || '-'}</p><hr><p>${safe.message}</p>`;
+
+  try {
+    const transporter = createTransporter();
+    await transporter.sendMail({
+      from,
+      to,
+      replyTo: email,
+      subject: `Prismix contact message from ${name}`,
+      text: textBody,
+      html: htmlBody
+    });
+    res.json({ ok: true, message: 'Message sent.' });
+  } catch (error) {
+    const messageText = error instanceof Error ? error.message : 'Email delivery failed.';
+    res.status(502).json({ ok: false, message: messageText });
+  }
 });
 
 app.post('/api/convert', upload.array('files', LIMITS.maxUploadFiles), async (req, res) => {
