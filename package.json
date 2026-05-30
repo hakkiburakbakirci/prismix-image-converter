@@ -1,8 +1,8 @@
 {
   "name": "prismix-image-converter",
-  "version": "1.0.27",
+  "version": "1.0.31",
   "private": true,
-  "description": "Prismix Image Converter v1.0.27 configured for prismix.online with AdSense account meta, AdSense loader snippet, ads.txt, production SITE_URL and SEO-ready sitemap/robots defaults.",
+  "description": "Prismix Image Converter v1.0.31 with redesigned premium active and passive mobile tab bar icons.",
   "type": "module",
   "scripts": {
     "dev": "node server/server.js",
@@ -21,7 +21,8 @@
     "png-to-ico": "^3.0.1",
     "sharp": "^0.33.5",
     "heic-convert": "^2.1.0",
-    "heic-to": "^1.4.2"
+    "heic-to": "^1.4.2",
+    "nodemailer": "^6.9.16"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
