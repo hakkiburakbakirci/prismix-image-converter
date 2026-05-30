@@ -4516,3 +4516,412 @@ body.language-sheet-open { overflow: hidden; }
   .prx-language-switcher.prx-language-top { top: 82px !important; }
   body:not(.language-choice-made) .tool-launch { padding-top: 142px !important; }
 }
+
+/* Prismix v1.0.28 — mobile tab hit-area fix, larger centered icons and contact form polish */
+@media (max-width: 920px) {
+  .app-sidebar,
+  .app-sidebar * {
+    box-sizing: border-box !important;
+  }
+  .app-sidebar .sidebar-nav:not(.sidebar-secondary) {
+    position: relative !important;
+    display: grid !important;
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+    grid-auto-flow: unset !important;
+    grid-auto-columns: unset !important;
+    align-items: center !important;
+    justify-items: center !important;
+    gap: clamp(3px, 1.2vw, 6px) !important;
+    overflow: hidden !important;
+    pointer-events: auto !important;
+  }
+  .app-sidebar .sidebar-nav:not(.sidebar-secondary) .nav-item {
+    position: relative !important;
+    z-index: 1 !important;
+    isolation: isolate !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 46px !important;
+    display: grid !important;
+    place-items: center !important;
+    justify-self: stretch !important;
+    align-self: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    transform: none !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: transparent !important;
+  }
+  .app-sidebar .sidebar-nav:not(.sidebar-secondary) .nav-item::before,
+  .app-sidebar .sidebar-nav:not(.sidebar-secondary) .nav-item::after,
+  .app-sidebar .sidebar-nav:not(.sidebar-secondary) .nav-indicator,
+  .app-sidebar .sidebar-nav:not(.sidebar-secondary) .nav-icon-shell,
+  .app-sidebar .sidebar-nav:not(.sidebar-secondary) .nav-icon-shell *,
+  .app-sidebar .sidebar-nav:not(.sidebar-secondary) .nav-item span,
+  .app-sidebar .sidebar-nav:not(.sidebar-secondary) .nav-item span * {
+    pointer-events: none !important;
+  }
+  .app-sidebar .sidebar-nav:not(.sidebar-secondary) .nav-icon-shell,
+  .app-sidebar .sidebar-nav:not(.sidebar-secondary) .nav-item span,
+  .app-sidebar .sidebar-nav:not(.sidebar-secondary) .nav-item.active .nav-icon-shell,
+  .app-sidebar .sidebar-nav:not(.sidebar-secondary) .nav-item.active span {
+    display: grid !important;
+    place-items: center !important;
+    justify-self: center !important;
+    align-self: center !important;
+    margin: 0 auto !important;
+  }
+  .app-sidebar .sidebar-nav:not(.sidebar-secondary) .nav-icon-svg,
+  .app-sidebar .sidebar-nav:not(.sidebar-secondary) .nav-item.active .nav-icon-svg {
+    width: clamp(19px, 5.9vw, 24px) !important;
+    height: clamp(19px, 5.9vw, 24px) !important;
+    display: block !important;
+    margin: auto !important;
+    transform: none !important;
+  }
+  .app-sidebar .sidebar-nav:not(.sidebar-secondary) .nav-icon-svg .nav-path,
+  .app-sidebar .sidebar-nav:not(.sidebar-secondary) .nav-icon-svg .nav-accent {
+    stroke-width: 2.15 !important;
+  }
+  .app-sidebar .sidebar-nav:not(.sidebar-secondary) .nav-item.active {
+    z-index: 2 !important;
+  }
+}
+@media (max-width: 350px) {
+  .app-sidebar .sidebar-nav:not(.sidebar-secondary) .nav-icon-svg,
+  .app-sidebar .sidebar-nav:not(.sidebar-secondary) .nav-item.active .nav-icon-svg {
+    width: 19px !important;
+    height: 19px !important;
+  }
+}
+.contact-status {
+  margin: 0;
+  padding: 0;
+  min-height: 20px;
+  color: #64748b;
+  font-weight: 850;
+  line-height: 1.45;
+}
+.contact-status.is-success { color: #047857; }
+.contact-status.is-error { color: #be123c; }
+.contact-form button[disabled] {
+  cursor: wait;
+  filter: saturate(.86) brightness(.98);
+  opacity: .82;
+}
+.footer .copyright {
+  letter-spacing: -.01em;
+}
+
+/* Prismix v1.0.30 — mobile tabbar rebuilt with isolated equal hit cells */
+.prx-mobile-tabbar { display: none; }
+@media (max-width: 920px) {
+  .app-sidebar > .sidebar-nav:not(.sidebar-secondary) {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  .app-sidebar .prx-mobile-tabbar {
+    --tab-gap: clamp(4px, 1.35vw, 7px);
+    --tab-shell: clamp(36px, 10.7vw, 43px);
+    position: relative !important;
+    z-index: 5 !important;
+    display: grid !important;
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+    align-items: center !important;
+    justify-items: center !important;
+    justify-content: center !important;
+    gap: var(--tab-gap) !important;
+    width: 100% !important;
+    max-width: 430px !important;
+    min-width: 0 !important;
+    height: 54px !important;
+    min-height: 54px !important;
+    max-height: 54px !important;
+    padding: 4px !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    border-radius: 22px !important;
+    border: 1px solid rgba(226,232,240,.82) !important;
+    background: rgba(255,255,255,.74) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.96), 0 8px 18px rgba(15,23,42,.045) !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+  }
+
+  .app-sidebar .prx-mobile-tab-item,
+  .app-sidebar .prx-mobile-tab-item:link,
+  .app-sidebar .prx-mobile-tab-item:visited {
+    position: relative !important;
+    isolation: isolate !important;
+    display: grid !important;
+    place-items: center !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 46px !important;
+    min-height: 46px !important;
+    max-height: 46px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+    text-decoration: none !important;
+    color: #334155 !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    transform: none !important;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: transparent !important;
+  }
+
+  .app-sidebar .prx-mobile-tab-item::before,
+  .app-sidebar .prx-mobile-tab-item::after {
+    pointer-events: none !important;
+  }
+
+  .app-sidebar .prx-mobile-tab-icon {
+    position: relative !important;
+    z-index: 1 !important;
+    width: var(--tab-shell) !important;
+    height: var(--tab-shell) !important;
+    min-width: var(--tab-shell) !important;
+    min-height: var(--tab-shell) !important;
+    max-width: var(--tab-shell) !important;
+    max-height: var(--tab-shell) !important;
+    display: grid !important;
+    place-items: center !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    border-radius: clamp(12px, 3.45vw, 16px) !important;
+    color: #334155 !important;
+    background: radial-gradient(circle at 30% 18%, rgba(255,255,255,.98), rgba(255,255,255,.36) 32%, transparent 60%), linear-gradient(180deg, #ffffff 0%, #f3f6fb 100%) !important;
+    border: 1px solid rgba(226,232,240,.96) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.98), inset 0 -1px 0 rgba(148,163,184,.10), 0 3px 8px rgba(15,23,42,.045) !important;
+    transform: none !important;
+    pointer-events: none !important;
+    transition: background .18s ease, color .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease !important;
+  }
+
+  .app-sidebar .prx-mobile-tab-icon *,
+  .app-sidebar .prx-mobile-tab-icon svg,
+  .app-sidebar .prx-mobile-tab-icon svg * {
+    pointer-events: none !important;
+  }
+
+  .app-sidebar .prx-mobile-tab-icon .nav-icon-svg {
+    width: clamp(19px, 5.9vw, 24px) !important;
+    height: clamp(19px, 5.9vw, 24px) !important;
+    display: block !important;
+    margin: auto !important;
+    overflow: visible !important;
+    transform: none !important;
+  }
+
+  .app-sidebar .prx-mobile-tab-icon .nav-icon-svg .nav-path,
+  .app-sidebar .prx-mobile-tab-icon .nav-icon-svg .nav-accent {
+    stroke-width: 2.15 !important;
+  }
+
+  .app-sidebar .prx-mobile-tab-item:hover .prx-mobile-tab-icon,
+  .app-sidebar .prx-mobile-tab-item:focus-visible .prx-mobile-tab-icon {
+    transform: translateY(-1px) !important;
+    border-color: rgba(203,213,225,.98) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.98), 0 7px 13px rgba(15,23,42,.075) !important;
+  }
+
+  .app-sidebar .prx-mobile-tab-item.active .prx-mobile-tab-icon,
+  .app-sidebar .prx-mobile-tab-item[aria-current="page"] .prx-mobile-tab-icon {
+    color: #fff !important;
+    border-color: transparent !important;
+    background: radial-gradient(circle at 28% 18%, rgba(255,255,255,.42), transparent 30%), linear-gradient(135deg, var(--nav-accent-1) 0%, var(--nav-accent-2) 100%) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.30), 0 7px 15px rgba(99,102,241,.20), 0 2px 6px rgba(15,23,42,.075) !important;
+  }
+
+  .app-sidebar .prx-mobile-tab-item.active .nav-icon-svg .nav-accent,
+  .app-sidebar .prx-mobile-tab-item.active .nav-icon-svg .nav-dot,
+  .app-sidebar .prx-mobile-tab-item[aria-current="page"] .nav-icon-svg .nav-accent,
+  .app-sidebar .prx-mobile-tab-item[aria-current="page"] .nav-icon-svg .nav-dot {
+    stroke: rgba(255,255,255,.96) !important;
+    fill: rgba(255,255,255,.96) !important;
+  }
+
+  .app-sidebar .prx-mobile-tab-item::after {
+    content: '' !important;
+    position: absolute !important;
+    left: 50% !important;
+    bottom: 0 !important;
+    z-index: 0 !important;
+    width: clamp(13px, 3.8vw, 17px) !important;
+    height: 3px !important;
+    border-radius: 999px !important;
+    opacity: 0 !important;
+    transform: translateX(-50%) scaleX(.55) !important;
+    background: linear-gradient(90deg, var(--nav-accent-1), var(--nav-accent-2)) !important;
+    box-shadow: 0 3px 8px rgba(124,58,237,.24) !important;
+    transition: opacity .18s ease, transform .18s ease !important;
+  }
+
+  .app-sidebar .prx-mobile-tab-item.active::after,
+  .app-sidebar .prx-mobile-tab-item[aria-current="page"]::after {
+    opacity: 1 !important;
+    transform: translateX(-50%) scaleX(1) !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .app-sidebar .prx-mobile-tabbar {
+    --tab-gap: 5px;
+    --tab-shell: 39px;
+    height: 52px !important;
+    min-height: 52px !important;
+    max-height: 52px !important;
+    border-radius: 20px !important;
+  }
+  .app-sidebar .prx-mobile-tab-item,
+  .app-sidebar .prx-mobile-tab-item:link,
+  .app-sidebar .prx-mobile-tab-item:visited {
+    height: 44px !important;
+    min-height: 44px !important;
+    max-height: 44px !important;
+  }
+}
+
+@media (max-width: 350px) {
+  .app-sidebar .prx-mobile-tabbar {
+    --tab-gap: 4px;
+    --tab-shell: 35px;
+    height: 50px !important;
+    min-height: 50px !important;
+    max-height: 50px !important;
+    padding: 4px !important;
+  }
+  .app-sidebar .prx-mobile-tab-icon .nav-icon-svg {
+    width: 19px !important;
+    height: 19px !important;
+  }
+}
+
+/* Prismix v1.0.31 — premium active/passive mobile tab icons */
+.nav-icon-svg.prx-premium-svg .nav-soft {
+  fill: color-mix(in srgb, var(--nav-accent-1, #2e7bff) 14%, transparent);
+  stroke: none;
+}
+.nav-icon-svg.prx-premium-svg .nav-path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.15;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.nav-icon-svg.prx-premium-svg .nav-accent {
+  fill: none;
+  stroke: var(--nav-accent-1, #2e7bff);
+  stroke-width: 2.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.nav-icon-svg.prx-premium-svg .nav-dot {
+  fill: var(--nav-accent-2, #7b61ff);
+  stroke: rgba(255,255,255,.9);
+  stroke-width: .6;
+}
+
+@media (max-width: 920px) {
+  .app-sidebar .prx-mobile-tab-icon {
+    color: #475569 !important;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(255,255,255,1), rgba(255,255,255,.42) 38%, transparent 67%),
+      linear-gradient(180deg, #ffffff 0%, #f7faff 56%, #eef4ff 100%) !important;
+    border-color: rgba(218,226,239,.98) !important;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,1),
+      inset 0 -1px 0 rgba(148,163,184,.11),
+      0 4px 10px rgba(15,23,42,.055) !important;
+  }
+  .app-sidebar .prx-mobile-tab-icon .nav-icon-svg {
+    width: clamp(22px, 6.45vw, 27px) !important;
+    height: clamp(22px, 6.45vw, 27px) !important;
+    filter: drop-shadow(0 1px 1px rgba(15,23,42,.045));
+  }
+  .app-sidebar .prx-mobile-tab-icon .nav-soft {
+    fill: color-mix(in srgb, var(--nav-accent-1, #2e7bff) 13%, transparent) !important;
+  }
+  .app-sidebar .prx-mobile-tab-icon .nav-path {
+    stroke: currentColor !important;
+    stroke-width: 2.08 !important;
+  }
+  .app-sidebar .prx-mobile-tab-icon .nav-accent {
+    stroke: var(--nav-accent-1, #2e7bff) !important;
+    stroke-width: 2.22 !important;
+  }
+  .app-sidebar .prx-mobile-tab-icon .nav-dot {
+    fill: var(--nav-accent-2, #7b61ff) !important;
+    stroke: rgba(255,255,255,.95) !important;
+  }
+  .app-sidebar .prx-mobile-tab-item:hover .prx-mobile-tab-icon,
+  .app-sidebar .prx-mobile-tab-item:focus-visible .prx-mobile-tab-icon {
+    transform: translateY(-1px) !important;
+    color: #26354a !important;
+    border-color: color-mix(in srgb, var(--nav-accent-1, #2e7bff) 24%, #dbe5f1) !important;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,1),
+      0 8px 15px rgba(15,23,42,.085),
+      0 0 0 3px color-mix(in srgb, var(--nav-accent-1, #2e7bff) 9%, transparent) !important;
+  }
+  .app-sidebar .prx-mobile-tab-item.active .prx-mobile-tab-icon,
+  .app-sidebar .prx-mobile-tab-item[aria-current="page"] .prx-mobile-tab-icon {
+    color: #ffffff !important;
+    background:
+      radial-gradient(circle at 26% 20%, rgba(255,255,255,.55), rgba(255,255,255,.18) 29%, transparent 56%),
+      linear-gradient(135deg, var(--nav-accent-1, #2e7bff) 0%, var(--nav-accent-2, #7b61ff) 100%) !important;
+    border-color: rgba(255,255,255,.34) !important;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.34),
+      inset 0 -1px 0 rgba(15,23,42,.14),
+      0 10px 18px color-mix(in srgb, var(--nav-accent-2, #7b61ff) 28%, transparent),
+      0 2px 6px rgba(15,23,42,.075) !important;
+  }
+  .app-sidebar .prx-mobile-tab-item.active .nav-icon-svg,
+  .app-sidebar .prx-mobile-tab-item[aria-current="page"] .nav-icon-svg {
+    filter: drop-shadow(0 1px 2px rgba(15,23,42,.22));
+  }
+  .app-sidebar .prx-mobile-tab-item.active .nav-soft,
+  .app-sidebar .prx-mobile-tab-item[aria-current="page"] .nav-soft {
+    fill: rgba(255,255,255,.22) !important;
+  }
+  .app-sidebar .prx-mobile-tab-item.active .nav-path,
+  .app-sidebar .prx-mobile-tab-item.active .nav-accent,
+  .app-sidebar .prx-mobile-tab-item[aria-current="page"] .nav-path,
+  .app-sidebar .prx-mobile-tab-item[aria-current="page"] .nav-accent {
+    stroke: rgba(255,255,255,.98) !important;
+  }
+  .app-sidebar .prx-mobile-tab-item.active .nav-dot,
+  .app-sidebar .prx-mobile-tab-item[aria-current="page"] .nav-dot {
+    fill: rgba(255,255,255,.98) !important;
+    stroke: rgba(255,255,255,.35) !important;
+  }
+  .app-sidebar .prx-mobile-tab-item::after {
+    bottom: 0 !important;
+    width: clamp(14px, 4vw, 18px) !important;
+    height: 3px !important;
+    background: linear-gradient(90deg, var(--nav-accent-1, #2e7bff), var(--nav-accent-2, #7b61ff)) !important;
+  }
+}
+
+@media (max-width: 350px) {
+  .app-sidebar .prx-mobile-tab-icon .nav-icon-svg {
+    width: 21px !important;
+    height: 21px !important;
+  }
+}
